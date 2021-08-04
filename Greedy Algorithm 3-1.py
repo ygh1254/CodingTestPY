@@ -3,7 +3,7 @@
 n = int(input("Enter the amount of change"))
 count = 0
 
-coin_types = [500, 100, 50, 10] # Using list! Be brief
+coin_types = [500, 100, 50, 10] # Use list! Be brief
 
 for coin in coin_types :
     count += n // coin
