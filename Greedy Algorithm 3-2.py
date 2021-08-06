@@ -1,3 +1,4 @@
+#Greedy Algorithm Problem 1
 result = 0
 i = 0
 n,m,k = map(int, input().split()) # Use map function
