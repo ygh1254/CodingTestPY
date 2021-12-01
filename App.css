@@ -1,0 +1,57 @@
+.Header {
+  text-align: center;
+  padding: 20px;
+  border-radius: 0px;
+  background-color: #003c8f;
+}
+
+.Start {
+  text-align: center;
+  padding: 10px;
+}
+
+.Content {
+  text-align: cetner;
+  margin: 0 auto;
+}
+
+.Warning {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.btn {
+  margin: 5px;
+  align-items: center;
+}
+
+.Ctnt {
+  background-color: yellow;
+  margin: 20px auto;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.Score {
+  text-align: right;
+}
+
+button {
+  width: 200px;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+  text-align: center;
+}
