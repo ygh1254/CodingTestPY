@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 class Score extends Component{
     render(){
+        var score=this.props.score;
         return(
             <div>
-                <p>Your Score : {this.props.score} / {this.props.max}</p>
+                <p>Your Score : {score} / 10</p>
             </div>
         );
     }
