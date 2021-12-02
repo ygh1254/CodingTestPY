@@ -4,10 +4,12 @@ class Start extends Component{
     render(){
         return(
             <header>
-                <button onClick={function(e){
+                <div onClick={function(e){
                     e.preventDefault();
                     this.props.onChangePage();
-                }.bind(this)}>{this.props.sub}</button>
+                }.bind(this)}>
+                    <button>{this.props.sub}</button>
+                </div>
             </header>
         );  
     }
