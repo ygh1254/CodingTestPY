@@ -14,6 +14,7 @@ class App extends Component {
       selected_content_id:1,
       subject:{title:'Quiz', sub:'START'},
       welcome:{title:null, desc1:null, desc2:null, desc3:null, desc4:null},
+      result:{title:'Thank You', decs1:null, desc2:null, desc3:null, desc4:null},
       contents:[
         {id:1, title:'Q1 : What is the name of WSP2 professor?', desc1:'1. Prof. 이예원', desc2:'2. Prof. 안종창', desc3:'3. Prof. 오현옥', desc4:'4. Prof. 이욱'},
         {id:2, title:'Q2 : Which is not 교양필수 subject for the first grade?', desc1:'1. 말과글', desc2:'2. 과학기술의철학적이해',desc3:'3. 정보시스템개론',desc4:'4. 공학도를위한창의적컴퓨팅'},
@@ -26,33 +27,44 @@ class App extends Component {
         {id:9, title:'Q9 : ', desc1:'1. ', desc2:'2. ',desc3:'3. ',desc4:'4. '},
         {id:10, title:'Q10 : ', desc1:'1. ', desc2:'2. ',desc3:'3. ',desc4:'4. '}
       ],
+      answers:[{id:1, answer:1},
+        {id:2, answer:3},
+        {id:3, answer:2},
+        {id:4, answer:2},
+        {id:5, answer:2},
+        {id:6, answer:2},
+        {id:7, answer:4},
+        {id:8, answer:3},
+        {id:9, answer:1},
+        {id:10, answer:1}
+      ],
+      answer:null,
       score:0,
-      max : 0
     }
   }
 
   render() {
-    var _title, _desc1, _desc2, _desc3, _desc4 = null;
+    var _title, _desc1, _desc2, _desc3, _desc4, _sub = null;
     if(this.state.mode === 'welcome'){
       _title = this.state.welcome.title;
-      _desc1 = this.state.welcome.desc1;
-      _desc2 = this.state.welcome.desc2;
-      _desc3 = this.state.welcome.desc3;
-      _desc4 = this.state.welcome.desc4;
+      _sub = this.state.subject.sub;
     } else if(this.state.mode === 'read'){
       var i = 0;
       while(i < this.state.contents.length){
         var data = this.state.contents[i];
         if(data.id === this.state.selected_content_id){
           _title = data.title;
-          _desc1 = <button>{data.desc1}</button>;
-          _desc2 = <button>{data.desc2}</button>;
-          _desc3 = <button>{data.desc3}</button>;
-          _desc4 = <button>{data.desc4}</button>;
+          _desc1 = data.desc1;
+          _desc2 = data.desc2;
+          _desc3 = data.desc3;
+          _desc4 = data.desc4;
           break;
         }
         i = i + 1;
-      }
+      }   
+    }
+    else if(this.state.mode === 'result'){
+      _title = this.state.result.title;
     }
 
     return(
@@ -66,7 +78,7 @@ class App extends Component {
           <div className="Warning"><Warning/></div>
           <div className="Start">
             <Start
-              sub={this.state.subject.sub}
+              sub={_sub}
               onChangePage={function(){
                 this.setState({mode:'read'});
               }.bind(this)}>
@@ -80,10 +92,29 @@ class App extends Component {
                   selected_content_id:Number(id)
                 });
               }.bind(this)}
-              data = {this.state.contents}
+              onChangePage2={function(){
+                this.setState({mode:'result'}, () => {
+                  console.log("mode : " + this.state.mode);
+                });
+              }.bind(this)}
+              setAnswer={function(temp){
+                this.setState({answer:temp}, () => {
+                  console.log("answer : " + this.state.answer)
+                });
+              }.bind(this)}
+              addScore={function(){
+                this.setState({score:Number(this.state.score)+1}, () => {
+                  console.log("score : " + this.state.score)
+                })
+              }.bind(this)}
+              data={this.state.contents}
+              sci={Number(this.state.selected_content_id)}
+              mode={this.state.mode}
+              answer={this.state.answer}
+              answers={this.state.answers}
+              score={this.state.score}
             title={_title} desc1={_desc1} desc2={_desc2}
-            desc3={_desc3} desc4={_desc4}
-            max = {this.state.max}></Content>
+            desc3={_desc3} desc4={_desc4}></Content>
           </div>
           <div className="Score"><Score
           score={this.state.score}>
