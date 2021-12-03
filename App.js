@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Start from './components/Start';
 import Content from "./components/Content";
 import Score from "./components/Score";
+import Button from "./components/Button";
 import Warning from "./components/Warning";
 import './App.css';
 
@@ -11,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       mode:'welcome',
-      selected_content_id:1,
+      selected_content_id:0,
+      show:false,
       subject:{title:'Quiz', sub:'START'},
       welcome:{title:null, desc1:null, desc2:null, desc3:null, desc4:null},
       result:{title:'Thank You', decs1:null, desc2:null, desc3:null, desc4:null},
@@ -76,16 +78,25 @@ class App extends Component {
             </Header>
           </div>
           <div className="Warning"><Warning/></div>
-          <div className="Start">
             <Start
+              sci={this.state.selected_content_id}
+              data={this.state.contents}
               sub={_sub}
-              onChangePage={function(){
-                this.setState({mode:'read'});
-              }.bind(this)}>
+              onChangePage={function(id){
+                this.setState({
+                  mode:'read',
+                  selected_content_id:Number(id),
+                  show:true
+              }, () => {
+                  console.log('mode : ' + this.state.mode);
+                  console.log('sci : ' + this.state.selected_content_id);
+              });
+            }.bind(this)}>
           </Start>
-          </div>
-          <div className="Content">
-            <Content 
+          <Content>
+            {/* wwhile문이 동작하지 않는 중! */}
+            while({this.props.show}){
+              <Button
               onChangePage={function(id){
                 this.setState({
                   mode:'read',
@@ -95,11 +106,6 @@ class App extends Component {
               onChangePage2={function(){
                 this.setState({mode:'result'}, () => {
                   console.log("mode : " + this.state.mode);
-                });
-              }.bind(this)}
-              setAnswer={function(temp){
-                this.setState({answer:temp}, () => {
-                  console.log("answer : " + this.state.answer)
                 });
               }.bind(this)}
               addScore={function(){
@@ -113,9 +119,11 @@ class App extends Component {
               answer={this.state.answer}
               answers={this.state.answers}
               score={this.state.score}
-            title={_title} desc1={_desc1} desc2={_desc2}
-            desc3={_desc3} desc4={_desc4}></Content>
-          </div>
+              title={_title} desc1={_desc1} desc2={_desc2}
+              desc3={_desc3} desc4={_desc4}>
+              </Button>
+            }
+          </Content>
           <div className="Score"><Score
           score={this.state.score}>
             </Score>
