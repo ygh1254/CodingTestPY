@@ -1,6 +1,8 @@
 # Greedy Algorithm Problem 2 (1)
 n, m = map(int, input().split())
+
 result = 0
+data = []
 
 for _ in range(m) :
     data.append(list(map(int, input().split())))
