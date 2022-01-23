@@ -28,6 +28,7 @@ def dfs(_data, truetable, x, y):
     if _data[x+1][y] == 0:
         dfs(_data, truetable, x+1, y)
         print(_data, x, y)
+    # Icecream number is needed
 
 
 dfs(_data, truetable, 0, 0)
